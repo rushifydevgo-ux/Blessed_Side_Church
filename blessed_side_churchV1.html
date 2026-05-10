@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Blessed Side Church | San Jose, CA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0a0a0a;
+  --off-black: #111;
+  --dark: #1a1a1a;
+  --mid: #2e2e2e;
+  --gray: #888;
+  --light-gray: #bbb;
+  --border: #2a2a2a;
+  --border-light: #ddd;
+  --white: #ffffff;
+  --off-white: #f4f4f4;
+  --cream: #faf9f7;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Nunito', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 100px;
+  transition: background 0.3s, border-color 0.3s;
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+.nav-logo {
+  display: inline-flex; align-items: center;
+  text-decoration: none; line-height: 1;
+}
+.nav-logo img {
+  height: 74px; width: 74px;
+  display: block;
+  object-fit: contain;
+}
+.nav-logo span { display: none; }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none; font-weight: 700;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--white) !important; color: var(--black) !important;
+  padding: 9px 22px; font-weight: 800 !important;
+  font-size: 11px !important; letter-spacing: 0.1em !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--off-white) !important; }
+.nav-give {
+  background: transparent !important;
+  color: var(--white) !important;
+  border: 1.5px solid rgba(255,255,255,0.35) !important;
+  padding: 8px 20px !important;
+  font-weight: 800 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.1em !important;
+  transition: all 0.2s !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+.nav-give:hover {
+  background: var(--white) !important;
+  color: var(--black) !important;
+  border-color: var(--white) !important;
+}
+.nav-socials { display: flex; gap: 14px; align-items: center; }
+.nav-social-icon {
+  color: rgba(255,255,255,0.4); font-size: 15px; text-decoration: none;
+  transition: color 0.2s; line-height: 1;
+}
+.nav-social-icon:hover { color: var(--white); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; background: var(--black);
+  min-height: 100vh; display: flex; align-items: center; overflow: hidden;
+}
+.hero-grain {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+.hero-lines {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 80px,
+    rgba(255,255,255,0.015) 80px, rgba(255,255,255,0.015) 81px
+  );
+}
+.hero-big-text {
+  position: absolute; bottom: -40px; right: -20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(160px, 22vw, 300px);
+  color: rgba(255,255,255,0.03);
+  line-height: 1; letter-spacing: 0.02em;
+  user-select: none; z-index: 0;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 158px 60px 80px;
+  max-width: 820px;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gray); font-weight: 700; margin-bottom: 32px;
+}
+.hero-tag::before { content: ''; width: 30px; height: 1px; background: var(--gray); }
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 12vw, 160px);
+  line-height: 0.92; color: var(--white);
+  letter-spacing: 0.02em; margin-bottom: 32px;
+}
+.hero h1 em { font-style: normal; color: rgba(255,255,255,0.25); }
+.hero-mission {
+  font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.5);
+  max-width: 560px; line-height: 1.7; font-weight: 300;
+  margin-bottom: 44px; font-style: italic;
+}
+.hero-mission strong { color: var(--white); font-style: normal; font-weight: 700; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.btn {
+  display: inline-block; padding: 14px 32px;
+  font-size: 11px; font-family: 'Nunito', sans-serif;
+  font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; text-decoration: none; border: none; transition: all 0.25s;
+}
+.btn-white { background: var(--white); color: var(--black); }
+.btn-white:hover { background: var(--off-white); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.3); }
+.btn-outline:hover { border-color: var(--white); }
+.hero-scroll {
+  position: absolute; bottom: 36px; left: 60px; z-index: 2;
+  display: flex; align-items: center; gap: 10px;
+  color: rgba(255,255,255,0.2); font-size: 9px;
+  letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700;
+}
+.hero-scroll::before { content: ''; width: 40px; height: 1px; background: rgba(255,255,255,0.15); }
+
+/* ── TICKER ── */
+.ticker {
+  background: var(--white); overflow: hidden;
+  padding: 14px 0; white-space: nowrap;
+}
+.ticker-track {
+  display: inline-flex; gap: 0;
+  animation: ticker 30s linear infinite;
+}
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: 0.12em;
+  color: var(--black); padding-right: 40px;
+}
+.ticker-sep { color: var(--light-gray); font-size: 12px; }
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── MISSION SECTION ── */
+.mission-section {
+  background: var(--black); padding: 120px 60px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  border-top: 1px solid var(--border);
+}
+.mission-label {
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gray); font-weight: 700; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.mission-label::before { content: ''; width: 30px; height: 1px; background: var(--gray); }
+.mission-statement {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.05; color: var(--white);
+  letter-spacing: 0.02em;
+}
+.mission-statement em { font-style: normal; color: var(--gray); }
+.mission-body p {
+  font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.85;
+  font-weight: 300; margin-bottom: 20px;
+}
+.mission-body strong { color: var(--white); font-weight: 700; }
+.mission-verse {
+  border-left: 2px solid rgba(255,255,255,0.15); padding-left: 20px;
+  font-size: 15px; color: rgba(255,255,255,0.35); line-height: 1.7;
+  font-style: italic; margin-top: 28px;
+}
+
+/* ── STATS ── */
+.stats-row {
+  background: var(--off-black); border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.stat-cell {
+  padding: 50px 40px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.stat-cell:last-child { border-right: none; }
+.stat-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 60px; color: var(--white); letter-spacing: 0.04em; line-height: 1;
+}
+.stat-desc { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray); margin-top: 8px; font-weight: 700; }
+
+/* ── VALUES ── */
+.values-section { background: var(--off-black); padding: 120px 60px; border-top: 1px solid var(--border); }
+.section-header { margin-bottom: 70px; }
+.section-eyebrow {
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gray); font-weight: 700; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gray); }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(50px, 7vw, 100px);
+  line-height: 0.95; color: var(--white); letter-spacing: 0.02em;
+}
+.section-title em { font-style: normal; color: var(--gray); }
+.values-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--border);
+}
+.value-card {
+  background: var(--off-black); padding: 36px 28px;
+  transition: background 0.3s; cursor: default;
+  position: relative; overflow: hidden;
+}
+.value-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--white); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.value-card:hover { background: var(--dark); }
+.value-card:hover::before { transform: scaleX(1); }
+.value-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px; letter-spacing: 0.2em; color: var(--gray);
+  margin-bottom: 14px;
+}
+.value-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; color: var(--white); letter-spacing: 0.04em;
+  margin-bottom: 8px; line-height: 1;
+}
+.value-motto {
+  font-size: 11px; letter-spacing: 0.1em; color: var(--gray);
+  text-transform: uppercase; font-weight: 700; margin-bottom: 14px;
+}
+.value-text {
+  font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7;
+  font-weight: 300;
+}
+.value-verse {
+  margin-top: 16px; font-size: 12px; color: rgba(255,255,255,0.25);
+  font-style: italic; line-height: 1.6; border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+/* ── QUOTE SECTION ── */
+.quote-section {
+  background: var(--white); padding: 100px 60px;
+  text-align: center;
+}
+.quote-section blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 4vw, 48px); font-style: italic;
+  color: var(--black); line-height: 1.4; max-width: 900px; margin: 0 auto 20px;
+}
+.quote-attribution {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gray); font-weight: 700;
+}
+.quotes-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+  margin-top: 60px; text-align: left;
+}
+.quote-card {
+  background: var(--off-white); border: 1px solid #e5e5e5;
+  padding: 28px; border-radius: 2px;
+}
+.quote-card .qmark { font-family: 'Playfair Display', serif; font-size: 44px; color: #ddd; line-height: 1; margin-bottom: 8px; }
+.quote-card p { font-family: 'Playfair Display', serif; font-size: 16px; font-style: italic; color: var(--black); line-height: 1.7; margin-bottom: 16px; }
+.quote-card .qauthor { font-size: 11px; font-weight: 700; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; }
+.quote-card .qmeta { font-size: 11px; color: #aaa; margin-top: 3px; }
+
+/* ── PRESENCE SECTION ── */
+.presence-section {
+  background: var(--black); padding: 120px 60px;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.presence-tag { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: rgba(255,255,255,0.04); line-height: 1; position: absolute; }
+.presence-text .section-eyebrow { margin-bottom: 20px; }
+.presence-card {
+  background: var(--off-black); border: 1px solid var(--border);
+  padding: 30px; margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.presence-card:hover { border-color: rgba(255,255,255,0.3); }
+.presence-card h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 0.06em; color: var(--white);
+  margin-bottom: 4px;
+}
+.presence-card .pc-tag { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray); font-weight: 700; margin-bottom: 10px; }
+.presence-card p { font-size: 13.5px; color: rgba(255,255,255,0.4); line-height: 1.7; }
+.presence-card .pc-verse { font-size: 12px; color: rgba(255,255,255,0.2); font-style: italic; margin-top: 10px; }
+
+/* ── TIMES ── */
+.times-section {
+  background: var(--off-black); padding: 100px 60px;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.times-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 60px; }
+.time-card {
+  background: var(--off-black); padding: 44px 36px;
+  transition: background 0.2s;
+}
+.time-card:hover { background: var(--dark); }
+.time-day { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gray); font-weight: 700; margin-bottom: 14px; }
+.time-name { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); letter-spacing: 0.04em; margin-bottom: 10px; }
+.time-hour { font-size: 48px; font-weight: 300; color: rgba(255,255,255,0.8); line-height: 1; margin-bottom: 14px; }
+.time-desc { font-size: 13.5px; color: rgba(255,255,255,0.35); line-height: 1.7; }
+.time-tag { display: inline-block; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); font-size: 9.5px; padding: 4px 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; margin-top: 16px; }
+
+
+/* ── INFO ── */
+.info-section {
+  background: var(--off-black); padding: 100px 60px;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+}
+.info-block h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; color: var(--white); letter-spacing: 0.04em;
+  margin-bottom: 30px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+.info-row { display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start; }
+.info-dot { width: 4px; height: 4px; background: var(--gray); border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
+.info-body { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.info-body a { color: var(--white); text-decoration: none; }
+.info-body a:hover { color: var(--light-gray); }
+.info-body small { display: block; font-size: 11px; color: var(--gray); margin-top: 2px; }
+.badge-open { background: #1a3d1a; color: #5dba5d; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 1px; margin-left: 8px; vertical-align: middle; }
+.badge-closed { background: #3d1a1a; color: #ba5d5d; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; padding: 2px 8px; border-radius: 1px; margin-left: 8px; vertical-align: middle; }
+.hours-table { width: 100%; border-collapse: collapse; }
+.hours-table tr { border-bottom: 1px solid var(--border); }
+.hours-table tr:last-child { border-bottom: none; }
+.hours-table td { padding: 12px 0; font-size: 13.5px; color: rgba(255,255,255,0.45); }
+.hours-table td:last-child { text-align: right; }
+.hours-table tr.today td { color: var(--white); font-weight: 700; }
+.social-row { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+.social-btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 12px 20px; border: 1px solid var(--border);
+  color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+  transition: all 0.2s;
+}
+.social-btn:hover { border-color: var(--white); color: var(--white); }
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--white); padding: 120px 60px;
+  text-align: center;
+}
+.cta-section h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 10vw, 130px); color: var(--black);
+  line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 20px;
+}
+.cta-section p { font-size: 18px; color: var(--gray); margin-bottom: 40px; font-weight: 300; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-black { background: var(--black); color: var(--white); }
+.btn-black:hover { background: var(--dark); transform: translateY(-2px); }
+.btn-outline-dark { background: transparent; color: var(--black); border: 1.5px solid rgba(0,0,0,0.25); }
+.btn-outline-dark:hover { border-color: var(--black); }
+
+/* ── FOOTER ── */
+footer { background: var(--black); border-top: 1px solid var(--border); padding: 80px 60px 40px; }
+.footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid var(--border); margin-bottom: 36px; }
+.footer-brand .nav-logo { display: block; margin-bottom: 16px; }
+.footer-brand .nav-logo img { height: 52px; }
+.footer-brand p { font-size: 13px; color: var(--gray); line-height: 1.8; max-width: 240px; margin-bottom: 24px; }
+.footer-socials { display: flex; gap: 12px; }
+.footer-social { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 14px; text-decoration: none; transition: all 0.2s; }
+.footer-social:hover { border-color: var(--white); color: var(--white); }
+.footer-col h4 { font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gray); margin-bottom: 20px; font-weight: 700; }
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 12px; }
+.footer-col a { font-size: 14px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: var(--white); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.footer-bottom p { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+
+/* ACTIONS BAR */
+.actions-bar { background: var(--off-black); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 60px; display: flex; gap: 10px; flex-wrap: wrap; }
+.action-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; border: none; font-family: 'Nunito', sans-serif; cursor: pointer; transition: all 0.2s; }
+.action-btn.pri { background: var(--white); color: var(--black); }
+.action-btn.pri:hover { background: var(--off-white); }
+.action-btn.sec { background: transparent; border: 1px solid var(--border); color: rgba(255,255,255,0.5); }
+.action-btn.sec:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
+
+/* CONTACT BAR */
+.contact-bar { background: var(--black); border-bottom: 1px solid var(--border); padding: 0 60px; display: flex; align-items: stretch; flex-wrap: wrap; }
+.contact-cell { padding: 16px 32px 16px 0; margin-right: 32px; border-right: 1px solid var(--border); }
+.contact-cell:last-child { border-right: none; margin-right: 0; }
+.contact-cell label { display: block; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gray); margin-bottom: 4px; font-weight: 700; }
+.contact-cell strong { font-size: 13px; color: var(--white); font-weight: 600; }
+.contact-cell a { color: var(--white); text-decoration: none; }
+.contact-cell a:hover { color: var(--light-gray); }
+
+@media(max-width:1000px){
+  nav{padding:0 24px;} .nav-links{display:none;}
+  .hero-content,.mission-section,.info-section,.presence-section{padding:80px 24px;}
+  .mission-section,.info-section,.presence-section{grid-template-columns:1fr;}
+  .values-grid,.times-grid{grid-template-columns:1fr 1fr;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .quotes-grid{grid-template-columns:1fr;}
+  .cta-section,.values-section,.times-section,.quote-section{padding:80px 24px;}
+  .actions-bar,.contact-bar{padding:12px 24px;}
+  .hero-content{padding:120px 24px 60px;}
+  .hero-scroll{left:24px;}
+  .footer-top{grid-template-columns:1fr 1fr;} footer{padding:60px 24px 32px;}
+  #cta{padding:80px 24px;}
+}
+@media(max-width:600px){
+  .values-grid,.times-grid,.stats-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="nav-logo" href="#"><img src="data:image/png;base64,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" alt="The Blessed Side Church"/></a>
+  <ul class="nav-links">
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#times">Visit</a></li>
+    <li><a href="#info">Info</a></li>
+    <li>
+      <div class="nav-socials">
+        <a class="nav-social-icon" href="https://www.facebook.com/theblessedside.church/" target="_blank" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a class="nav-social-icon" href="https://www.instagram.com/blessedsidechurch/" target="_blank" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="nav-social-icon" href="https://www.youtube.com/watch?v=Gb_oulFI6DQ" target="_blank" title="YouTube">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="var(--black)"/></svg>
+        </a>
+      </div>
+    </li>
+    <li><a href="https://blessedside.breezechms.com/give/online" target="_blank" class="nav-give">Give</a></li>
+    <li><a href="#times" class="nav-cta">Plan a Visit</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-big-text">BLESSED</div>
+  <div class="hero-content">
+    <div class="hero-tag">Christian Church · San Jose, CA</div>
+    <h1>THE<br>BLESSED<br><em>SIDE.</em></h1>
+    <p class="hero-mission">
+      <strong>We are a presence-driven church</strong> taking the message of reconciliation to the world.
+    </p>
+    <div class="hero-actions">
+      <a href="#times" class="btn btn-white">Plan a Visit</a>
+      <a href="https://blessedside.breezechms.com/give/online" target="_blank" class="btn btn-outline">Give</a>
+      <a href="#values" class="btn btn-outline">Our Values</a>
+      <a href="https://www.youtube.com/watch?v=Gb_oulFI6DQ" target="_blank" class="btn btn-outline">▶ Watch Us</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll to explore</div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">THE BLESSED SIDE <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">PRESENCE-DRIVEN <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">SAN JOSE, CA <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">SUNDAYS 2PM <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">ALL ARE WELCOME <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">A TRIBE CALLED BLESSED <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">THE BLESSED SIDE <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">PRESENCE-DRIVEN <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">SAN JOSE, CA <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">SUNDAYS 2PM <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">ALL ARE WELCOME <span class="ticker-sep">✦</span></span>
+    <span class="ticker-item">A TRIBE CALLED BLESSED <span class="ticker-sep">✦</span></span>
+  </div>
+</div>
+
+<!-- CONTACT BAR -->
+<div class="contact-bar">
+  <div class="contact-cell"><label>Address</label><strong>3695 Rose Terrasse Cir, San Jose, CA 95148</strong></div>
+  <div class="contact-cell"><label>Phone</label><strong><a href="tel:4086947514">(408) 694-7514</a></strong></div>
+  <div class="contact-cell"><label>Service Hours</label><strong><span id="open-badge" class="badge-closed">Closed</span> · Opens 2 PM Sun</strong></div>
+</div>
+
+<!-- ACTIONS BAR -->
+<div class="actions-bar">
+  <a href="https://maps.google.com/?q=3695+Rose+Terrasse+Cir+San+Jose+CA+95148" target="_blank" class="action-btn pri">🗺 Directions</a>
+  <a href="tel:4086947514" class="action-btn sec">📞 Call</a>
+  <a href="https://www.facebook.com/theblessedside.church/" target="_blank" class="action-btn sec">Facebook</a>
+  <a href="https://www.instagram.com/blessedsidechurch/" target="_blank" class="action-btn sec">Instagram</a>
+  <a href="https://www.youtube.com/watch?v=Gb_oulFI6DQ" target="_blank" class="action-btn sec">▶ YouTube</a>
+  <a href="#" class="action-btn sec">🔗 Share</a>
+</div>
+
+<!-- MISSION -->
+<section id="mission" class="mission-section">
+  <div class="reveal">
+    <div class="mission-label">Our Mission</div>
+    <div class="mission-statement">
+      We Are A<br><em>Presence-</em><br>Driven<br>Church.
+    </div>
+  </div>
+  <div class="mission-body reveal">
+    <p>Taking the message of <strong>reconciliation to the world</strong> — that's not just what we do. It's who we are. At The Blessed Side, the Holy Spirit is the main attraction, and every gathering is a chance to encounter the living God.</p>
+    <p>We are a family. A tribe. A community that does life together, walks in faith together, and believes <strong>nobody gets left behind</strong>.</p>
+    <p>"When you walk in to the end of service you are Truly BLESSED. Worship and the message is definitely led by the Holy Spirit. You for sure feel like you're a part of a much larger family." — Church Member</p>
+    <div class="mission-verse">"For all who are being led by the Spirit of God, these are sons of God." — Romans 8:14</div>
+    <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="#times" class="btn btn-white">Join Us Sunday</a>
+      <a href="#values" class="btn btn-outline">Our 12 Values</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-cell reveal">
+    <div class="stat-big">2PM</div>
+    <div class="stat-desc">Every Sunday</div>
+  </div>
+  <div class="stat-cell reveal">
+    <div class="stat-big">12</div>
+    <div class="stat-desc">Core Values</div>
+  </div>
+  <div class="stat-cell reveal">
+    <div class="stat-big">1</div>
+    <div class="stat-desc">Tribe · One Family</div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<section id="values" class="values-section">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Core Values</div>
+    <div class="section-title">12 Ways<br>We <em>Live.</em></div>
+  </div>
+  <div class="values-grid">
+
+    <div class="value-card reveal">
+      <div class="value-num">01</div>
+      <div class="value-name">Unity</div>
+      <div class="value-motto">"We're better together"</div>
+      <div class="value-text">We believe the collective is greater than the individual. United we stand, divided we fall. In this house, no one gets left behind. Unity is the only thing that commands God's blessing.</div>
+      <div class="value-verse">"How good and pleasant it is when God's people live together in unity!" — Psalm 133:1</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">02</div>
+      <div class="value-name">Servant-Leadership</div>
+      <div class="value-motto">"Every leader is a servant first"</div>
+      <div class="value-text">Serving is a privilege. If you're too big to serve then you're too small to lead. We fill gaps whenever we see them. We serve willingly, cheerfully and joyfully.</div>
+      <div class="value-verse">"Whoever wants to become great among you must be your servant." — Mark 10:43</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">03</div>
+      <div class="value-name">Forgiveness</div>
+      <div class="value-motto">"Unforgiveness is bad for your health"</div>
+      <div class="value-text">Forgiveness is non-negotiable. We are commanded to extend mercy as we have been shown mercy. Forgiveness is not for them — it's for you. There can be no growth without forgiveness.</div>
+      <div class="value-verse">"Forgive anyone who offends you. Remember, the Lord forgave you." — Colossians 3:13</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">04</div>
+      <div class="value-name">Authenticity</div>
+      <div class="value-motto">"Keep it real"</div>
+      <div class="value-text">We don't do fake. We honor vulnerability, transparency and honesty. Letting go of who we think we're supposed to be and embracing who God called us to be.</div>
+      <div class="value-verse">"Let us not love with words or speech but with actions and in truth." — 1 John 3:18</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">05</div>
+      <div class="value-name">Excellence</div>
+      <div class="value-motto">"Nothing less than our best"</div>
+      <div class="value-text">By making the most of what we have, we represent the Lord by giving Him our best and trust that He will do the rest.</div>
+      <div class="value-verse">"Whatever you do, work at it with all your heart, as working for the Lord." — Colossians 3:23</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">06</div>
+      <div class="value-name">Generosity</div>
+      <div class="value-motto">"We don't have to, we get to"</div>
+      <div class="value-text">We honor God by giving our first and our best. A spirit of generosity ministers to the heart of the Father. We are blessed to be a blessing and cheerfully give of our time, energy and effort.</div>
+      <div class="value-verse">"God loves a cheerful giver." — 2 Corinthians 9:7</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">07</div>
+      <div class="value-name">Communication</div>
+      <div class="value-motto">"We're not mind-readers"</div>
+      <div class="value-text">We communicate clearly, openly, honestly and truthfully. Without communication there can be no trust. We are compassionate in tone and confront with grace.</div>
+      <div class="value-verse">"Everyone should be quick to listen, slow to speak and slow to become angry." — James 1:19</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">08</div>
+      <div class="value-name">Honor</div>
+      <div class="value-motto">"The pathway to blessing"</div>
+      <div class="value-text">Honor is foundational in the kingdom of God. Honor is the vehicle to blessing. We esteem those above us, around us and alongside us. We honor often, joyfully and loudly.</div>
+      <div class="value-verse">"Be devoted to one another in love. Honor one another above yourselves." — Romans 12:10</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">09</div>
+      <div class="value-name">Stewardship</div>
+      <div class="value-motto">"We may hold it but we don't own it"</div>
+      <div class="value-text">We steward our resources as gifts that God has entrusted to us. Everything we have is His — and we hold it with open hands and grateful hearts.</div>
+      <div class="value-verse">"The earth is the Lord's, and everything in it." — Psalm 24:1</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">10</div>
+      <div class="value-name">Reconciliation</div>
+      <div class="value-motto">"Bring it to the table"</div>
+      <div class="value-text">Reconciliation is the work of God. God has restored us — therefore it is our responsibility to initiate reconciliation with others. We reconcile vertically and horizontally. We are called to be Peacemakers.</div>
+      <div class="value-verse">"God through Christ reconciled us to himself and gave us the ministry of reconciliation." — 2 Cor. 5:18</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">11</div>
+      <div class="value-name">Encouragement</div>
+      <div class="value-motto">"Say It Again!"</div>
+      <div class="value-text">We believe in encouraging each other and aren't shy about showing it. We celebrate constantly and make everything a party. We reinforce individual excellence by banding together.</div>
+      <div class="value-verse">"Encourage one another and build up one another." — 1 Thessalonians 5:11</div>
+    </div>
+
+    <div class="value-card reveal">
+      <div class="value-num">12</div>
+      <div class="value-name">Community</div>
+      <div class="value-motto">"A Tribe Called Blessed"</div>
+      <div class="value-text">At The Blessed Side, all who come are family. We constantly create space to connect with others. We move as a tribe. We cannot take the steps for you but we will take them with you.</div>
+      <div class="value-verse">"Love one another. As I have loved you, so you must love one another." — John 13:34</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRESENCE & CULTURE SECTION -->
+<section class="presence-section">
+  <div class="reveal">
+    <div class="section-eyebrow">How We Live</div>
+    <div class="section-title" style="font-size:clamp(40px,6vw,80px);">Culture<br><em>& Presence.</em></div>
+    <p style="color:rgba(255,255,255,0.4);font-size:15px;line-height:1.8;margin-top:24px;max-width:400px;">These aren't just ideas. They're the way we breathe, lead, and love at The Blessed Side.</p>
+  </div>
+  <div class="reveal">
+    <div class="presence-card">
+      <div class="pc-tag">Cloud Chasers</div>
+      <h4>Presence-Driven</h4>
+      <p>We prioritize and give the Holy Spirit the entire room — not just space. At The Blessed Side the Holy Spirit is the main attraction. Daily private encounters preface public encounters.</p>
+      <div class="pc-verse">"For all who are being led by the Spirit of God, these are sons of God." — Romans 8:14</div>
+    </div>
+    <div class="presence-card">
+      <div class="pc-tag">Pray, Obey, Repeat</div>
+      <h4>Obedience & Trust</h4>
+      <p>A lifestyle of obedience is necessary. We exercise our love of Jesus by obeying His word. Obedience honors and moves the heart of God. We honor a lifestyle of alignment to the Word.</p>
+      <div class="pc-verse">"If you love me, you will obey my commands." — John 14:15</div>
+    </div>
+    <div class="presence-card">
+      <div class="pc-tag">We Need Us All</div>
+      <h4>Empowerment</h4>
+      <p>We empower those with our heart to lead with their mind. We trade empowerment for teachability and humility. Every person entrusted to our care matters deeply.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- SERVICE TIMES -->
+<section id="times" class="times-section">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Join Us</div>
+    <div class="section-title">Service<br><em>Times.</em></div>
+  </div>
+  <div class="times-grid">
+    <div class="time-card reveal">
+      <div class="time-day">Sunday</div>
+      <div class="time-name">Sunday Service</div>
+      <div class="time-hour">2:00 PM</div>
+      <div class="time-desc">Our main weekly gathering — Spirit-led worship, a powerful message, and a family you'll want to come back to every week.</div>
+      <div class="time-tag">Main Service</div>
+    </div>
+    <div class="time-card reveal">
+      <div class="time-day">Mid-Week</div>
+      <div class="time-name">Bible Study</div>
+      <div class="time-hour">TBD</div>
+      <div class="time-desc">Go deeper into the Word with us. Contact us directly for current mid-week Bible study times and details.</div>
+      <div class="time-tag">Contact for Details</div>
+    </div>
+    <div class="time-card reveal">
+      <div class="time-day">Always</div>
+      <div class="time-name">Prayer & Fellowship</div>
+      <div class="time-hour">Open Door</div>
+      <div class="time-desc">Our community is here for you. We believe in the power of prayer and walking through life together — reach out anytime.</div>
+      <div class="time-tag">All Are Welcome</div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO / LOCATION -->
+<section id="info" class="info-section">
+  <div class="info-block reveal">
+    <h3>Find Us</h3>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-body">3695 Rose Terrasse Cir, San Jose, CA 95148<small>Plus Code: 86FQ+5Q San Jose, California</small></div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-body"><a href="tel:4086947514">(408) 694-7514</a><small>Call us with any questions</small></div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-body">Sunday Service opens 2 PM<small id="info-badge"><span class="badge-closed" id="info-open-badge">Closed Now</span></small></div>
+    </div>
+    <div class="social-row">
+      <a href="https://www.facebook.com/theblessedside.church/" target="_blank" class="social-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook
+      </a>
+      <a href="https://www.instagram.com/blessedsidechurch/" target="_blank" class="social-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> Instagram
+      </a>
+      <a href="https://www.youtube.com/watch?v=Gb_oulFI6DQ" target="_blank" class="social-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="var(--black)"/></svg> YouTube
+      </a>
+    </div>
+    <div style="margin-top:20px;">
+      <a href="https://maps.google.com/?q=3695+Rose+Terrasse+Cir+San+Jose+CA+95148" target="_blank" class="action-btn pri">🗺 Get Directions</a>
+    </div>
+  </div>
+
+  <div class="info-block reveal">
+    <h3>Service Schedule</h3>
+    <table class="hours-table">
+      <tr class="today"><td>Sunday ✦ Main Service</td><td>Opens 2 PM</td></tr>
+    </table>
+    <div style="margin-top:32px;background:var(--dark);border:1px solid var(--border);padding:24px;text-align:center;">
+      <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">3695 Rose Terrasse Cir · San Jose, CA</div>
+      <a href="https://maps.google.com/?q=3695+Rose+Terrasse+Cir+San+Jose+CA+95148" target="_blank" style="color:var(--white);font-size:13px;text-decoration:none;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Open in Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <p class="reveal" style="font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#aaa;font-weight:700;margin-bottom:20px;">Come As You Are</p>
+  <h2 class="reveal">YOU BELONG<br>HERE.</h2>
+  <p class="reveal">Join us every Sunday at 2 PM. We can't wait to meet you.</p>
+  <div class="cta-actions reveal">
+    <a href="https://maps.google.com/?q=3695+Rose+Terrasse+Cir+San+Jose+CA+95148" target="_blank" class="btn btn-black">🗺 Get Directions</a>
+    <a href="tel:4086947514" class="btn btn-outline-dark">📞 (408) 694-7514</a>
+    <a href="https://www.youtube.com/watch?v=Gb_oulFI6DQ" target="_blank" class="btn btn-outline-dark">▶ Watch Online</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#"><img src="data:image/png;base64,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" alt="The Blessed Side Church"/></a>
+      <p>A presence-driven church taking the message of reconciliation to the world. All are welcome. A Tribe Called Blessed.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/theblessedside.church/" target="_blank" class="footer-social" title="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/blessedsidechurch/" target="_blank" class="footer-social" title="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://www.youtube.com/watch?v=Gb_oulFI6DQ" target="_blank" class="footer-social" title="YouTube">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="var(--black)"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#mission">Our Mission</a></li>
+        <li><a href="#values">12 Core Values</a></li>
+        <li><a href="#times">Service Times</a></li>
+            <li><a href="#info">Location & Info</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/theblessedside.church/" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com/blessedsidechurch/" target="_blank">Instagram</a></li>
+        <li><a href="https://www.youtube.com/watch?v=Gb_oulFI6DQ" target="_blank">YouTube</a></li>
+        <li><a href="#">Add Website</a></li>
+        <li><a href="#">Claim This Business</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="tel:4086947514">(408) 694-7514</a></li>
+        <li><a href="https://maps.google.com" target="_blank">3695 Rose Terrasse Cir</a></li>
+        <li><a href="https://maps.google.com" target="_blank">San Jose, CA 95148</a></li>
+        <li><a href="https://maps.google.com" target="_blank">Sundays at 2 PM</a></li>
+        <li><a href="https://maps.google.com" target="_blank">Leave a Review</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 The Blessed Side Church · 3695 Rose Terrasse Cir, San Jose, CA 95148</p>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => obs.observe(el));
+
+  // Open/closed badge — Sunday 2-6pm
+  function checkHours() {
+    const now = new Date();
+    const day = now.getDay();
+    const hr = now.getHours();
+    const isOpen = day === 0 && hr >= 14 && hr < 18;
+    ['open-badge', 'info-open-badge'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = isOpen ? 'Open Now' : 'Closed Now';
+        el.className = isOpen ? 'badge-open' : 'badge-closed';
+      }
+    });
+  }
+  checkHours();
+</script>
+</body>
+</html>
